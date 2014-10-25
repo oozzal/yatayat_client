@@ -1,0 +1,13 @@
+<ion-view title="Post">
+  <ion-content class="has-header">
+    <div class="card">
+      <div class="item item-text-wrap">
+        <h2>Post - {{ post.id }} </h2>
+        <img src="{{ post.image || 'img/default.png' }}">
+        <p>{{ post.description }}</p>
+        <p>{{ post.descLength() }}</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+
