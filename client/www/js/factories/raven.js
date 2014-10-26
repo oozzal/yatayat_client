@@ -1,30 +1,30 @@
 module('yatayat.factories')
 
-.factory('Raven', ['$timeout', '$q', function($timeout, $q) {
-  var baseUrl = 'http://localhost:3000/';
+.factory('Raven', ['$http', '$q', function($http, $q) {
+  var baseUrl = 'http://192.168.1.2:3000/';
   return {
-    get: function(path, callback) {
-      /**
-       * $http.get(baseUrl + path)
-       * .success(function() {});
-       **/
-      // callback.call();
+    get: function(path) {
       var defer = $q.defer();
-      $timeout(function() {
-        defer.resolve();
-      }, 1000);
+
+      $http.get(baseUrl + path)
+      .success(function(result) {
+        defer.resolve(result);
+      });
+
       return defer.promise;
     },
 
-    post: function(path, data, callback) {
-      /**
-       * $http.post(baseUrl + path, data)
-       * .success(function() {});
-       **/
+    post: function(path, data) {
       var defer = $q.defer();
-      $timeout(function() {
+
+      $http({
+        url: baseUrl + path,
+        method: 'POST',
+        data: $.param(data),
+      }).then(function() {
         defer.resolve();
-      }, 1000);
+      });
+
       return defer.promise;
     }
   }

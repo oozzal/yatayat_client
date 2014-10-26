@@ -1,6 +1,6 @@
 module('yatayat.controllers')
 
-.controller('AppCtrl', ['$scope', 'Modal', '$timeout', function($scope, Modal, $timeout) {
+.controller('AppCtrl', ['$scope', '$rootScope', 'Modal', '$timeout', function($scope, $rootScope, Modal, $timeout) {
   // Form data for the login modal
   $scope.loginData = {};
 

@@ -1,20 +1,31 @@
 module('yatayat.factories')
 
-.factory('User', ['Raven', '$q', function(Raven, $q) {
+.factory('User', ['Raven', '$q', 'Sim', function(Raven, $q, Sim) {
   return {
     checkRegistration: function() {
-      // var userId = Phone.number();
       var defer = $q.defer();
-      Raven.get('users/:id')
-      .then(function() {
-        defer.resolve();
+      Sim.getDetails()
+      .then(function(result) {
+        Raven.get('users/' + result.simSerialNumber)
+        .then(function(user) {
+          user.id && defer.resolve(user);
+        });
       });
       return defer.promise;
     },
 
-    register: function(phoneNumber) {
+    register: function(simSerialNumber, phoneNumber) {
       var defer = $q.defer();
-      Raven.post('users/new', {id: phoneNumber})
+
+      var reg_info = {};
+      reg_info.sim_serial_number = simSerialNumber;
+      if(phoneNumber) {
+        reg_info.phone_number = phoneNumber;
+      }
+
+      Raven.post('users', {
+        user: reg_info
+      })
       .then(function() {
         defer.resolve();
       });

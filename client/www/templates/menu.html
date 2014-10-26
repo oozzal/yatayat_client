@@ -9,7 +9,7 @@
 
   <ion-side-menu side="left">
     <header class="bar bar-header bar-royal">
-      <h1 class="title">Yatayat</h1>
+      <h1 class="title">Welcome, {{ username || userId || 'Guest' }}</h1>
     </header>
     <ion-content class="has-header">
       <ion-list>
@@ -22,7 +22,11 @@
         <ion-item nav-clear menu-close href="#/app/search">
           Search
         </ion-item>
+        <p class="text-center">
+          &copy; yatayat 2014
+        </p>
       </ion-list>
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>
+

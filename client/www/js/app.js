@@ -27,7 +27,6 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.c
     }, 2000);
   });
 })
-
 .config(function($stateProvider, $urlRouterProvider) {
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/start');
@@ -86,5 +85,15 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.c
       }
     })
 
-});
+})
+.config(['$httpProvider', function ($httpProvider) {
+  // $http.post doesn't send data fix
+  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+  // Reset headers to avoid OPTIONS request (aka preflight)
+  // $httpProvider.defaults.headers.common = {};
+  // $httpProvider.defaults.headers.post = {};
+  // $httpProvider.defaults.headers.put = {};
+  // $httpProvider.defaults.headers.patch = {};
+}])
 
