@@ -1,14 +1,18 @@
 module('yatayat.factories')
 
 .factory('Raven', ['$http', '$q', function($http, $q) {
-  var baseUrl = 'http://192.168.1.2:3000/';
+  var baseUrl = 'http://192.168.1.4:3000/';
   return {
     get: function(path) {
       var defer = $q.defer();
 
-      $http.get(baseUrl + path)
-      .success(function(result) {
-        defer.resolve(result);
+      $http({
+        url: baseUrl + path,
+        method: 'GET'
+      }).then(function(result) {
+        defer.resolve(result.data);
+      }, function() {
+        defer.reject();
       });
 
       return defer.promise;
@@ -23,6 +27,8 @@ module('yatayat.factories')
         data: $.param(data),
       }).then(function() {
         defer.resolve();
+      }, function() {
+        defer.reject();
       });
 
       return defer.promise;

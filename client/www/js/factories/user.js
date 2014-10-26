@@ -8,7 +8,13 @@ module('yatayat.factories')
       .then(function(result) {
         Raven.get('users/' + result.simSerialNumber)
         .then(function(user) {
-          user.id && defer.resolve(user);
+          if(user.id) {
+            defer.resolve(user);
+          } else {
+            defer.reject();
+          }
+        }, function() {
+          defer.reject();
         });
       });
       return defer.promise;
