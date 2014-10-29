@@ -1,7 +1,7 @@
 module('yatayat.factories')
 
 .factory('Raven', ['$http', '$q', function($http, $q) {
-  var baseUrl = 'http://192.168.1.4:3000/';
+  var baseUrl = 'http://192.168.2.6:3000/';
   return {
     get: function(path) {
       var defer = $q.defer();

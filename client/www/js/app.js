@@ -10,24 +10,53 @@
 // 'yatayat.controllers' is found in controllers.js
 angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.controllers'])
 
-.run(function($ionicPlatform, $cordovaSplashscreen) {
+.run(['$ionicPlatform', '$rootScope', 'Loading',  function($ionicPlatform,  $rootScope, Loading) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
+
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
 
-    window.cordova && setTimeout(function() {
-      $cordovaSplashscreen.hide();
-    }, 2000);
+    $rootScope.$on('loading:show', function() {
+      Loading.show();
+    })
+
+    $rootScope.$on('loading:hide', function() {
+      Loading.hide();
+    })
   });
-})
-.config(function($stateProvider, $urlRouterProvider) {
+}])
+.config(['$httpProvider', function ($httpProvider) {
+  // fix for $http.post not sending data
+  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+  // Reset headers to avoid OPTIONS request (aka preflight)
+  // $httpProvider.defaults.headers.common = {};
+  // $httpProvider.defaults.headers.post = {};
+  // $httpProvider.defaults.headers.put = {};
+  // $httpProvider.defaults.headers.patch = {};
+  // Unified loading when http request made
+  $httpProvider.interceptors.push(function($rootScope) {
+   return {
+     request: function(config) {
+       $rootScope.$broadcast('loading:show');
+       return config;
+     },
+     response: function(response) {
+       $rootScope.$broadcast('loading:hide');
+       return response;
+     }
+   }
+  });
+}])
+
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/start');
 
@@ -85,15 +114,4 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.c
       }
     })
 
-})
-.config(['$httpProvider', function ($httpProvider) {
-  // $http.post doesn't send data fix
-  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-  // Reset headers to avoid OPTIONS request (aka preflight)
-  // $httpProvider.defaults.headers.common = {};
-  // $httpProvider.defaults.headers.post = {};
-  // $httpProvider.defaults.headers.put = {};
-  // $httpProvider.defaults.headers.patch = {};
 }])
-
