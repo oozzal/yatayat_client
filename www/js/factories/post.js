@@ -34,7 +34,20 @@ module('yatayat.factories')
     },
 
     create: function(options) {
+      var defer = $q.defer();
 
+      Raven.post('posts', { post: options })
+      .then(function(post) {
+        if(post.id) {
+          defer.resolve(post);
+        } else {
+          defer.reject();
+        }
+      }, function() {
+        defer.reject();
+      });
+
+      return defer.promise;
     },
 
     length: function() {
