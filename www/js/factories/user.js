@@ -25,16 +25,22 @@ module('yatayat.factories')
 
       var reg_info = {};
       reg_info.sim_serial_number = simSerialNumber;
+
       if(phoneNumber) {
         reg_info.phone_number = phoneNumber;
       }
 
-      Raven.post('users', {
-        user: reg_info
-      })
-      .then(function() {
-        defer.resolve();
+      Raven.post('users', { user: reg_info })
+      .then(function(user) {
+          if(user.id) {
+            defer.resolve(user);
+          } else {
+            defer.reject();
+          }
+      }, function() {
+        defer.reject();
       });
+
       return defer.promise;
     }
   }

@@ -31,7 +31,7 @@ gulp.task('sass', function(done) {
 
 gulp.task('js', function() {
 	gulp.src(paths.js)
-	.pipe(sourcemaps.init())
+	// .pipe(sourcemaps.init())
 	.pipe(concat('app.js'))
 	.pipe(ngAnnotate())
 	.pipe(uglify())

@@ -1,27 +1,44 @@
 module('yatayat.factories')
 
-.factory('Post', ['BaseModel', 'Raven', function(BaseModel, Raven) {
-  var posts = [
-    { id: 1, title: 'Accident at Koteshwor', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
-    { id: 2, title: 'Road Block at Sallaghari', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
-  ];
+.factory('Post', ['BaseModel', 'Raven', '$q', function(BaseModel, Raven, $q) {
 
   return angular.extend(BaseModel, {
-    all: function(callback) {
+    all: function() {
+      var defer = $q.defer();
       var data = [];
-      angular.forEach(posts, function(post) {
-        data.push(BaseModel.build(post));
+
+      Raven.get('posts')
+      .then(function(posts) {
+        angular.forEach(posts, function(post) {
+          data.push(BaseModel.build(post));
+        });
+        defer.resolve(data);
+      }, function() {
+        defer.reject();
       });
-      callback(data);
+
+      return defer.promise;
     },
 
-    get: function(id, callback) {
-      var data = posts.filter(function(m) { return m.id === parseInt(id) })[0];
-      callback(BaseModel.build(data));
+    get: function(id) {
+      var defer = $q.defer();
+
+      Raven.get('posts/' + id)
+      .then(function(post) {
+        defer.resolve(BaseModel.build(post));
+      }, function() {
+        defer.reject();
+      });
+
+      return defer.promise;
     },
 
-    descLength: function() {
-      return this.description.length;
+    create: function(options) {
+
+    },
+
+    length: function() {
+      return this.body.length;
     }
   }); // end angular.extend..
 }])

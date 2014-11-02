@@ -4,8 +4,8 @@
       <div class="item item-text-wrap">
         <h2>Post - {{ post.id }} </h2>
         <img src="{{ post.image || 'img/default.png' }}">
-        <p>{{ post.description }}</p>
-        <p>{{ post.descLength() }}</p>
+        <p>{{ post.title }}</p>
+        <p>{{ post.body }}</p>
       </div>
     </div>
   </ion-content>

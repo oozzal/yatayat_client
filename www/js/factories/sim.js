@@ -10,7 +10,7 @@ module('yatayat.factories')
           defer.resolve(result);
         });
       } else {
-        defer.resolve({simSerialNumber: 'nanu'});
+        defer.resolve({simSerialNumber: 'nanu', line1Number: '9808640957'});
       }
       return defer.promise;
     }
