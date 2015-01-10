@@ -6,16 +6,18 @@ module('yatayat.controllers')
 
   Modal.setup($scope, 'templates/tos.html');
 
-  $scope.enterMain = function(simSerialNumber) {
-    $rootScope.userId = simSerialNumber;
-    Navigator.go('app.posts', true);
-  };
-
+  // The very beginning of application logic
   User.checkRegistration()
   .then(function(user) {
     $scope.enterMain(user.sim_serial_number);
   }, function() {
+    // new user
   });
+
+  $scope.enterMain = function(simSerialNumber) {
+    $rootScope.simSerialNumber = simSerialNumber;
+    Navigator.go('app.posts', true);
+  };
 
   $scope.registerWithCredentials = function(simSerialNumber, phoneNumber) {
     User.register(simSerialNumber, phoneNumber)

@@ -50,6 +50,17 @@ module('yatayat.factories')
       return defer.promise;
     },
 
+    like: function(post_id, simSerialNumber) {
+      var defer = $q.defer();
+
+      Raven.post('posts/like/', {id: post_id, sim_serial_number: simSerialNumber})
+      .then(function(data) {
+        defer.resolve(data);
+      });
+
+      return defer.promise;
+    },
+
     length: function() {
       return this.body.length;
     }
