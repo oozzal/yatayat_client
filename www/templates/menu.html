@@ -5,7 +5,7 @@
       <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
 
       <ion-nav-buttons side="right">
-        <a class="button button-icon ion-plus-circled" href="#/app/report"></a>
+        <a class="button button-icon ion-home" href="#/app/posts"></a>
       </ion-nav-buttons>
     </ion-nav-bar>
 
@@ -15,7 +15,7 @@
 
   <ion-side-menu side="left">
     <header class="bar bar-header bar-royal">
-      <h1 class="title">Welcome, {{ username || simSerialNumber || 'Guest' }}</h1>
+      <h1 class="title">Welcome, {{ user.username || user.sim_serial_number || 'Guest' }}</h1>
     </header>
     <ion-content class="has-header">
       <ion-list>

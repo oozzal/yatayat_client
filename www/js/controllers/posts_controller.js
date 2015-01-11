@@ -12,7 +12,6 @@ module('yatayat.controllers')
     Post.like(post, $rootScope.user)
     .then(function() {
       post.cached_votes_up = post.cached_votes_up + 1;
-      post.liked = true;
     });
   };
 
@@ -22,7 +21,6 @@ module('yatayat.controllers')
     Post.like(post, $rootScope.user)
     .then(function() {
       post.cached_votes_down = post.cached_votes_down + 1;
-      post.disliked = true;
     });
   };
 

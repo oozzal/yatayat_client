@@ -10,10 +10,10 @@
         <p>{{ post.body }}</p>
         <!-- <p ng-hide="user.id == post.user_id"> -->
         <p>
-          <button ng-hide="post.liked" class="button button-small button-balanced icon icon-right ion-thumbsup" ng-click="likePost($index, $event)">
+          <button class="button button-small button-balanced icon icon-right ion-thumbsup" ng-click="likePost($index, $event)">
             {{ post.cached_votes_up }}
           </button>
-          <button ng-hide="post.disliked" class="button button-small button-assertive icon icon-right ion-thumbsdown" ng-click="dislikePost($index, $event)">
+          <button class="button button-small button-assertive icon icon-right ion-thumbsdown" ng-click="dislikePost($index, $event)">
             {{ post.cached_votes_down }}
           </button>
           <!-- <button class="icon ion-plus-circled"></button> -->

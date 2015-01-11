@@ -1,8 +1,8 @@
 module('yatayat.controllers')
 
 .controller('StartCtrl',
-  ['$scope', '$rootScope', 'User', 'Sim', 'Modal', 'Navigator', '$ionicPopup', 'Validator',
-  function($scope, $rootScope, User, Sim, Modal, Navigator, $ionicPopup, Validator) {
+  ['$scope', '$rootScope', 'User', 'Sim', 'Modal', 'Navigator', '$ionicPopup', 'Validator', 'UiHelper',
+  function($scope, $rootScope, User, Sim, Modal, Navigator, $ionicPopup, Validator, UiHelper) {
 
   Modal.setup($scope, 'templates/tos.html');
 
@@ -16,7 +16,10 @@ module('yatayat.controllers')
 
   $scope.enterMain = function(user) {
     $rootScope.user = user;
-    Navigator.go('app.posts', true);
+    Navigator.go('app.posts', true)
+    .then(function() {
+      UiHelper.showToast('Welcome back!', 2000, 'bottom');
+    });
   };
 
   $scope.registerWithCredentials = function(simSerialNumber, phoneNumber) {
