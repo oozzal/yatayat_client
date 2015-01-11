@@ -50,10 +50,10 @@ module('yatayat.factories')
       return defer.promise;
     },
 
-    like: function(post_id, simSerialNumber) {
+    like: function(post, user) {
       var defer = $q.defer();
 
-      Raven.post('posts/like/', {id: post_id, sim_serial_number: simSerialNumber})
+      Raven.post('posts/like/', {id: post.id, sim_serial_number: user.sim_serial_number})
       .then(function(data) {
         defer.resolve(data);
       });

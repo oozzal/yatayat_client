@@ -11,31 +11,27 @@ var ngAnnotate = require('gulp-ng-annotate');
 var sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
-  sass: ['./scss/**/*.scss'],
+  sass: ['./scss/**/*.scss', './www/css/**/*.scss'],
 	js: ['./www/js/**/*.js']
 };
 
 gulp.task('default', ['sass']);
 
-gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
-    .pipe(sass())
-    .pipe(gulp.dest('./www/css/'))
-    .pipe(minifyCss({
-      keepSpecialComments: 0
-    }))
-    .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest('./www/css/'))
-    .on('end', done);
+gulp.task('sass', function() {
+  gulp.src(paths.sass)
+  .pipe(concat('style.min.css'))
+  .pipe(sass())
+  .pipe(minifyCss({
+    keepSpecialComments: 0
+  }))
+  .pipe(gulp.dest('./www/'))
 });
 
 gulp.task('js', function() {
 	gulp.src(paths.js)
-	// .pipe(sourcemaps.init())
-	.pipe(concat('app.js'))
+	.pipe(concat('app.min.js'))
 	.pipe(ngAnnotate())
 	.pipe(uglify())
-	// .pipe(sourcemaps.write())
 	.pipe(gulp.dest('./www/'))
 });
 

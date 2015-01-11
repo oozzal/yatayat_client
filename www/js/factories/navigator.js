@@ -1,10 +1,10 @@
 module('yatayat.factories')
 
-.factory('Navigator', ['$state', '$ionicViewService', function($state, $ionicViewService) {
+.factory('Navigator', ['$state', '$ionicHistory', function($state, $ionicHistory) {
   return {
     go: function(state, clearHistory) {
       $state.go(state).then(function() {
-        clearHistory && $ionicViewService.clearHistory();
+        clearHistory && $ionicHistory.clearHistory();
       });
     }
   }

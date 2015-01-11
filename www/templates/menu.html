@@ -3,7 +3,13 @@
   <ion-pane ion-side-menu-content>
     <ion-nav-bar class="bar-royal nav-title-slide-ios7">
       <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
+
+      <ion-nav-buttons side="right">
+        <a class="button button-icon ion-plus-circled" href="#/app/report"></a>
+      </ion-nav-buttons>
     </ion-nav-bar>
+
+
     <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
   </ion-pane>
 
@@ -30,3 +36,9 @@
   </ion-side-menu>
 </ion-side-menus>
 
+<div class="float-button">
+  <span class="height-fix">
+    <a href="#/app/report" class="content button button-icon icon ion-plus-round">
+    </a>
+  </span>
+</div>

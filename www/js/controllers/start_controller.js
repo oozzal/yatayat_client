@@ -9,13 +9,13 @@ module('yatayat.controllers')
   // The very beginning of application logic
   User.checkRegistration()
   .then(function(user) {
-    $scope.enterMain(user.sim_serial_number);
+    $scope.enterMain(user);
   }, function() {
     // new user
   });
 
-  $scope.enterMain = function(simSerialNumber) {
-    $rootScope.simSerialNumber = simSerialNumber;
+  $scope.enterMain = function(user) {
+    $rootScope.user = user;
     Navigator.go('app.posts', true);
   };
 
@@ -26,7 +26,7 @@ module('yatayat.controllers')
         title: 'Success',
         template: simSerialNumber + ' registered successfully.'
       }).then(function() {
-        $scope.enterMain(simSerialNumber);
+        $scope.enterMain({sim_serial_number: simSerialNumber});
       });
     });
   };
