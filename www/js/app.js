@@ -10,7 +10,7 @@
 // 'yatayat.controllers' is found in controllers.js
 angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.controllers'])
 
-.run(['$ionicPlatform', '$rootScope', 'Loading',  function($ionicPlatform,  $rootScope, Loading) {
+.run(['$ionicPlatform', '$rootScope', 'Loading', 'User', 'UiHelper', 'Navigator', function($ionicPlatform,  $rootScope, Loading, User, UiHelper, Navigator) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -30,6 +30,17 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.c
     $rootScope.$on('loading:hide', function() {
       Loading.hide();
     })
+
+    // Always get the user and save in rootScope
+    User.checkRegistration()
+    .then(function(user) {
+      $rootScope.user = user;
+      Navigator.go('app.posts', true)
+      .then(function() {
+        UiHelper.showToast('Welcome back!', 3000, 'bottom');
+      });
+    });
+
   });
 }])
 .config(['$httpProvider', function ($httpProvider) {
@@ -81,7 +92,8 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.c
           templateUrl: 'templates/posts.html',
           controller: 'PostsCtrl'
         }
-      }
+      },
+      cache: false
     })
 
     .state('app.post', {
@@ -101,7 +113,8 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.c
           templateUrl: 'templates/report.html',
           controller: 'ReportCtrl'
         }
-      }
+      },
+      cache: false
     })
 
     .state('app.search', {

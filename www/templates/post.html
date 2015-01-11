@@ -2,10 +2,9 @@
   <ion-content class="has-header">
     <div class="card">
       <div class="item item-text-wrap">
-        <h2>Post - {{ post.id }} </h2>
-        <img src="{{ post.image || 'img/default.png' }}">
-        <p>{{ post.title }}</p>
-        <p>{{ post.body }}</p>
+        <h2 ng-bind="post.title"></h2>
+        <img ng-src="{{ post.image || 'img/default.png' }}">
+        <p ng-bind="post.body"></p>
       </div>
     </div>
   </ion-content>

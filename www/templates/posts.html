@@ -7,17 +7,23 @@
       <ion-item ng-repeat="post in posts" class="item item-thumbnail-left" type="item-text-wrap" href="#/app/posts/{{post.id}}">
         <img ng-src="{{ post.image || 'img/default.png' }}">
         <h2>{{ post.title}}</h2>
-        <p>{{ post.body }}</p>
+        <p ng-bind="post.body"></p>
         <!-- <p ng-hide="user.id == post.user_id"> -->
-        <p>
-          <button class="button button-small button-balanced icon icon-right ion-thumbsup" ng-click="likePost($index, $event)">
-            {{ post.cached_votes_up }}
-          </button>
-          <button class="button button-small button-assertive icon icon-right ion-thumbsdown" ng-click="dislikePost($index, $event)">
-            {{ post.cached_votes_down }}
-          </button>
-          <!-- <button class="icon ion-plus-circled"></button> -->
-        </p>
+        <button
+          class="button button-small button-balanced icon icon-right ion-thumbsup"
+          ng-click="likePost($index, $event)"
+          ng-bind="post.cached_votes_up">
+        </button>
+        <button
+          class="button button-small button-assertive icon icon-right ion-thumbsdown"
+          ng-click="dislikePost($index, $event)"
+          ng-bind="post.cached_votes_down">
+        </button>
+        <span class="item-note">
+          <i class="icon ion-calendar"></i> {{ post.created_at | date: 'medium' }}<br>
+          <i class="icon ion-person"></i> {{ post.user.username || 'Anonymous' }}
+        </span>
+        <!-- <button class="icon ion-plus-circled"></button> -->
       </ion-item>
     </ion-list>
   </ion-content>

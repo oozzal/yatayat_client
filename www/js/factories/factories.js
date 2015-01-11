@@ -26,7 +26,6 @@ module('yatayat.factories')
         duration = duration > 1000 ? 'long' : 'short';
         $cordovaToast.show(message, duration, position);
       } else {
-        console.log("Showing " +msg+ " for " +(duration/1000)+ " seconds");
         Loading.showWithOptions({ template: msg, noBackdrop: true, duration: duration });
       }
     }
