@@ -6,6 +6,11 @@
         <img ng-src="{{ report.image || 'img/default.png' }}">
         <p ng-bind="report.message"></p>
       </div>
+      <div class="item item-text-wrap">
+        <i class="icon ion-location"></i> {{ report.location.name }} &nbsp;
+        <i class="icon ion-clock"></i> {{ report.created_at | date: 'medium' }} &nbsp;
+        <i class="icon ion-person"></i> {{ report.user.username || 'Anonymous' }}
+      </div>
     </div>
   </ion-content>
 </ion-view>
