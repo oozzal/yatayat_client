@@ -1,8 +1,8 @@
 module('yatayat.controllers')
 
 .controller('StartCtrl',
-  ['$scope', '$rootScope', 'User', 'Sim', 'Modal', 'Navigator', '$ionicPopup', 'Validator',
-  function($scope, $rootScope, User, Sim, Modal, Navigator, $ionicPopup, Validator) {
+  ['$scope', '$rootScope', 'User', 'Sim', 'Modal', 'Router', '$ionicPopup', 'UiHelper',
+  function($scope, $rootScope, User, Sim, Modal, Router, $ionicPopup, UiHelper) {
 
   Modal.setup($scope, 'templates/tos.html');
 
@@ -13,7 +13,10 @@ module('yatayat.controllers')
         title: 'Success',
         template: simSerialNumber + ' registered successfully.'
       }).then(function() {
-        $scope.enterMain({sim_serial_number: simSerialNumber});
+        Router.go('app.reports', true)
+        .then(function() {
+          UiHelper.showToast('Welcome!', 3000, 'bottom');
+        });
       });
     });
   };

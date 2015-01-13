@@ -10,7 +10,7 @@
 // 'yatayat.controllers' is found in controllers.js
 angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.controllers'])
 
-.run(['$ionicPlatform', '$rootScope', 'Loading', 'User', 'UiHelper', 'Navigator', function($ionicPlatform,  $rootScope, Loading, User, UiHelper, Navigator) {
+.run(['$ionicPlatform', '$rootScope', 'Loading', 'User', 'UiHelper', 'Router', function($ionicPlatform,  $rootScope, Loading, User, UiHelper, Router) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -35,7 +35,7 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.c
     User.checkRegistration()
     .then(function(user) {
       $rootScope.user = user;
-      Navigator.go('app.posts', true)
+      Router.go('app.reports', true)
       .then(function() {
         UiHelper.showToast('Welcome back!', 3000, 'bottom');
       });
@@ -85,33 +85,33 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.c
       controller: 'AppCtrl'
     })
 
-    .state('app.posts', {
-      url: '/posts',
+    .state('app.reports', {
+      url: '/reports',
       views: {
         'menuContent' :{
-          templateUrl: 'templates/posts.html',
-          controller: 'PostsCtrl'
+          templateUrl: 'templates/reports.html',
+          controller: 'ReportsCtrl'
         }
       },
       cache: false
     })
 
-    .state('app.post', {
-      url: '/posts/:postId',
-      views: {
-        'menuContent' :{
-          templateUrl: 'templates/post.html',
-          controller: 'PostCtrl'
-        }
-      }
-    })
-
     .state('app.report', {
-      url: '/report',
+      url: '/reports/:reportId',
       views: {
         'menuContent' :{
           templateUrl: 'templates/report.html',
           controller: 'ReportCtrl'
+        }
+      }
+    })
+
+    .state('app.submit', {
+      url: '/submit',
+      views: {
+        'menuContent' :{
+          templateUrl: 'templates/submit.html',
+          controller: 'SubmitCtrl'
         }
       },
       cache: false

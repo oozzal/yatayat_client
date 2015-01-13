@@ -1,21 +1,12 @@
-<ion-view title="Report">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
+<ion-view title="Post">
   <ion-content class="has-header">
-    <h1>Submit a Report</h1>
-    <div class="list">
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">What did you see?</span>
-        <input type="text" ng-model="post.title" autofocus placeholder="Accident in Koteshwor">
-      </label>
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Can you describe the scene?</span>
-        <input type="text" ng-model="post.body" placeholder="Bike hit by a truck at Koteshwor chowk.">
-      </label>
+    <div class="card">
+      <div class="item item-text-wrap">
+        <h2 ng-bind="report.category.name"></h2>
+        <img ng-src="{{ report.image || 'img/default.png' }}">
+        <p ng-bind="report.message"></p>
+      </div>
     </div>
-    <button class="button button-block button-royal" ng-click="report()">
-      Submit
-    </button>
   </ion-content>
 </ion-view>
+

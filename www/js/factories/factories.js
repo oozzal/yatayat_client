@@ -75,7 +75,7 @@ module('yatayat.factories')
   }
 }])
 
-.factory('Navigator', [
+.factory('Router', [
           '$q', '$state', '$ionicHistory',
   function($q,   $state,   $ionicHistory) {
 

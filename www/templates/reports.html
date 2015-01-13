@@ -1,0 +1,30 @@
+<ion-view title="Posts">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <ion-list>
+      <ion-item ng-repeat="report in reports" class="item item-thumbnail-left" type="item-text-wrap" href="#/app/reports/{{report.id}}">
+        <img ng-src="{{ report.image || 'img/default.png' }}">
+        <h2 ng-bind="report.category.name"></h2>
+        <p ng-bind="report.message"></p>
+        <button
+          class="button button-small button-balanced icon icon-right ion-thumbsup"
+          ng-click="likeReport($index, $event)"
+          ng-bind="report.cached_votes_up">
+        </button>
+        <button
+          class="button button-small button-assertive icon icon-right ion-thumbsdown"
+          ng-click="dislikeReport($index, $event)"
+          ng-bind="report.cached_votes_down">
+        </button>
+        <span class="item-note">
+          <i class="icon ion-location"></i> {{ report.location.name }}<br>
+          <i class="icon ion-clock"></i> {{ report.created_at | date: 'medium' }}<br>
+          <i class="icon ion-person"></i> {{ report.user.username || 'Anonymous' }}
+        </span>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
+

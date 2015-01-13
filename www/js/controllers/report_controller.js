@@ -1,15 +1,11 @@
 module('yatayat.controllers')
 
-.controller('ReportCtrl', ['$scope', '$rootScope', 'Post', 'Navigator', function($scope, $rootScope, Post, Navigator) {
-  $scope.post = {
-    sim_serial_number: $rootScope.user.sim_serial_number
-  };
+.controller('ReportCtrl', ['$scope', '$stateParams', 'Report', function($scope, $stateParams, Report) {
+  $scope.report = {};
 
-  $scope.report = function() {
-    Post.create($scope.post)
-    .then(function() {
-      Navigator.go('app.posts', false, true);
-    });
-  };
+  Report.get($stateParams.reportId)
+  .then(function(data) {
+    $scope.report = data;
+  });
 }])
 

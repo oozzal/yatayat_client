@@ -1,16 +1,16 @@
 module('yatayat.factories')
 
-.factory('Post', ['BaseModel', 'Raven', '$q', function(BaseModel, Raven, $q) {
+.factory('Report', ['BaseModel', 'Raven', '$q', function(BaseModel, Raven, $q) {
 
   return angular.extend(BaseModel, {
     all: function() {
       var defer = $q.defer();
       var data = [];
 
-      Raven.get('posts')
-      .then(function(posts) {
-        angular.forEach(posts, function(post) {
-          data.push(BaseModel.build(post));
+      Raven.get('reports')
+      .then(function(reports) {
+        angular.forEach(reports, function(report) {
+          data.push(BaseModel.build(report));
         });
         defer.resolve(data);
       }, function() {
@@ -23,9 +23,9 @@ module('yatayat.factories')
     get: function(id) {
       var defer = $q.defer();
 
-      Raven.get('posts/' + id)
-      .then(function(post) {
-        defer.resolve(BaseModel.build(post));
+      Raven.get('reports/' + id)
+      .then(function(report) {
+        defer.resolve(BaseModel.build(report));
       }, function() {
         defer.reject();
       });
@@ -36,10 +36,10 @@ module('yatayat.factories')
     create: function(options) {
       var defer = $q.defer();
 
-      Raven.post('posts', { post: options })
-      .then(function(post) {
-        if(post.id) {
-          defer.resolve(post);
+      Raven.post('reports', { report: options })
+      .then(function(report) {
+        if(report.id) {
+          defer.resolve(report);
         } else {
           defer.reject();
         }
@@ -50,10 +50,10 @@ module('yatayat.factories')
       return defer.promise;
     },
 
-    like: function(post, user) {
+    like: function(report, user) {
       var defer = $q.defer();
 
-      Raven.post('posts/like/', {id: post.id, sim_serial_number: user.sim_serial_number})
+      Raven.post('reports/like/', {id: report.id, sim_serial_number: user.sim_serial_number})
       .then(function(data) {
         defer.resolve(data);
       });
