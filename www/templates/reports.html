@@ -18,11 +18,14 @@
           ng-click="dislikeReport($index, $event)"
           ng-bind="report.cached_votes_down">
         </button>
-        <span class="item-note">
-          <i class="icon ion-location"></i> {{ report.location.name }}<br>
-          <i class="icon ion-clock"></i> {{ report.created_at | date: 'medium' }}<br>
+        <br />
+        <br />
+        <p class="item-text-wrap">
+          <i class="icon ion-location"></i> {{ report.location.name }}
+          <i class="icon ion-clock"></i> {{ report.created_at | date: 'medium' }}
+          <br />
           <i class="icon ion-person"></i> {{ report.user.username || 'Anonymous' }}
-        </span>
+        </p>
       </ion-item>
     </ion-list>
   </ion-content>

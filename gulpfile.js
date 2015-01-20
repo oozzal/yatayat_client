@@ -11,7 +11,8 @@ var ngAnnotate = require('gulp-ng-annotate');
 var sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
-  sass: ['./scss/**/*.scss', './www/css/**/*.scss'],
+  // sass: ['./scss/**/*.scss', './www/scss/**/*.scss'],
+  sass: ['./www/scss/**/*.scss'],
 	js: ['./www/js/**/*.js']
 };
 
