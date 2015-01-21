@@ -3,8 +3,11 @@
     <div class="card">
       <div class="item item-text-wrap">
         <h2 ng-bind="report.category.name"></h2>
-        <img ng-src="{{ report.image || 'img/default.png' }}">
         <p ng-bind="report.message"></p>
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options">
+          <ui-gmap-layer type="TrafficLayer" show="true"></ui-gmap-layer>
+          <ui-gmap-marker coords="marker.coords" options="marker.options" idkey="marker.id"></ui-gmap-marker>
+        </ui-gmap-google-map>
       </div>
       <div class="item item-text-wrap">
         <i class="icon ion-location"></i> {{ report.location.name }} &nbsp;

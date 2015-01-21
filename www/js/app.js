@@ -8,7 +8,7 @@
 // 'yatayat' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'yatayat.controllers' is found in controllers.js
-angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.controllers'])
+angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.factories', 'yatayat.controllers'])
 
 .run(['$ionicPlatform', '$rootScope', 'Loading', 'User', 'UiHelper', 'Router', function($ionicPlatform,  $rootScope, Loading, User, UiHelper, Router) {
   $ionicPlatform.ready(function() {
@@ -43,6 +43,7 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.c
 
   });
 }])
+
 .config(['$httpProvider', function ($httpProvider) {
   // fix for $http.post not sending data
   $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -65,6 +66,16 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'yatayat.factories', 'yatayat.c
      }
    }
   });
+}])
+
+.config(['uiGmapGoogleMapApiProvider', function(uiGmapGoogleMapApiProvider) {
+  uiGmapGoogleMapApiProvider.configure({
+    key: 'AIzaSyB09h4QtoxL3alFV4JDzArJYDjoltix4r0',
+    v: '3.17',
+    libraries: 'weather,geometry,visualization',
+    // china: true
+  });
+
 }])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {

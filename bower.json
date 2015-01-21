@@ -1,7 +1,34 @@
 {
   "name": "yatayat",
-  "private": "true",
+  "private": true,
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0-beta.14"
+  },
+  "version": "0.0.1",
+  "homepage": "https://github.com/oozzal/yatayat_client",
+  "authors": [
+    "oozzal <theoozzal@gmail.com>"
+  ],
+  "description": "Transportation Reporting System",
+  "main": "www/index.html",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "geolocation",
+    "maps"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "www/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-google-maps": "~2.0.12",
+    "collide": "1.0.0-beta.3"
   }
 }

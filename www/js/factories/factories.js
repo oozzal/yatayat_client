@@ -122,6 +122,15 @@ ngModule('yatayat.factories')
   }
 }])
 
+.factory('Validator', [function() {
+  return {
+    isValidPhone: function(number) {
+      var phoneRegEx = /^\d{10}$/;
+      return number.match(phoneRegEx);
+    }
+  }
+}])
+
 .factory('ActionSheet', ['$ionicActionSheet', function($ionicActionSheet) {
 
   return {
@@ -138,7 +147,7 @@ ngModule('yatayat.factories')
        cancelText: 'Back',
        cancel: function() {
           // add cancel code..
-        },
+       },
        buttonClicked: function(index) {
          return true;
        }
@@ -146,14 +155,5 @@ ngModule('yatayat.factories')
 
    }
  }
-}])
-
-.factory('Validator', [function() {
-  return {
-    isValidPhone: function(number) {
-      var phoneRegEx = /^\d{10}$/;
-      return number.match(phoneRegEx);
-    }
-  }
 }])
 

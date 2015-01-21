@@ -1,5 +1,5 @@
 ngModule('yatayat.controllers')
-.controller('SubmitCtrl', ['$scope', '$rootScope', 'Report', 'Router', '$cordovaGeolocation', 'Raven', function($scope, $rootScope, Report, Router, $cordovaGeolocation, Raven) {
+.controller('SubmitCtrl', ['$scope', '$rootScope', 'Report', 'Router', '$cordovaGeolocation', 'Raven', 'UiHelper', function($scope, $rootScope, Report, Router, $cordovaGeolocation, Raven, UiHelper) {
 
   $scope.report = {
     location: {}
@@ -28,14 +28,15 @@ ngModule('yatayat.controllers')
 
   $scope.createReportWithLocation = function() {
     $rootScope.$broadcast('loading:show');
-    $cordovaGeolocation
-    .getCurrentPosition({timeout: 10000, enableHighAccuracy: false})
+    $cordovaGeolocation.getCurrentPosition({timeout: 10000, enableHighAccuracy: true})
     .then(function(position) {
       $scope.report.location.latitude = position.coords.latitude;
       $scope.report.location.longitude = position.coords.longitude;
+      // Loading will be hidden after report is created
       $scope.createReport();
     }, function() {
-      // error
+      $rootScope.$broadcast('loading:hide');
+      UiHelper.showToast('Could not get location.', 3000, 'bottom');
     });
   };
 
