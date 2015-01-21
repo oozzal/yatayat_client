@@ -1,4 +1,4 @@
-function module(name, options) {
+function ngModule(name, options) {
   try {
     return angular.module(name)
   } catch(err) {

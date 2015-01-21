@@ -1,4 +1,4 @@
-module('yatayat.factories')
+ngModule('yatayat.factories')
 
 .factory('Sim', ['$q', function($q) {
   return {

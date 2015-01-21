@@ -1,4 +1,4 @@
-module('yatayat.controllers')
+ngModule('yatayat.controllers')
 .controller('SubmitCtrl', ['$scope', '$rootScope', 'Report', 'Router', '$cordovaGeolocation', 'Raven', function($scope, $rootScope, Report, Router, $cordovaGeolocation, Raven) {
 
   $scope.report = {

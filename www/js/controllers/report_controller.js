@@ -1,4 +1,4 @@
-module('yatayat.controllers')
+ngModule('yatayat.controllers')
 
 .controller('ReportCtrl', ['$scope', '$stateParams', 'Report', function($scope, $stateParams, Report) {
   $scope.report = {};

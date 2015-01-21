@@ -1,4 +1,4 @@
-module('yatayat.factories')
+ngModule('yatayat.factories')
 
 .factory('Raven', ['$http', '$q', function($http, $q) {
   // var baseUrl = 'http://192.168.56.1:3000/';

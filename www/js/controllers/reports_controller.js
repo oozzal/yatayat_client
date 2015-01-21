@@ -1,4 +1,4 @@
-module('yatayat.controllers')
+ngModule('yatayat.controllers')
 
 .controller('ReportsCtrl', ['$scope', '$rootScope', 'Report', function($scope, $rootScope, Report) {
   Report.all()

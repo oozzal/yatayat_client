@@ -1,4 +1,4 @@
-module('yatayat.controllers')
+ngModule('yatayat.controllers')
 
 .controller('StartCtrl',
   ['$scope', '$rootScope', 'User', 'Sim', 'Modal', 'Router', '$ionicPopup', 'UiHelper',
@@ -8,7 +8,8 @@ module('yatayat.controllers')
 
   $scope.registerWithCredentials = function(simSerialNumber, phoneNumber) {
     User.register(simSerialNumber, phoneNumber)
-    .then(function() {
+    .then(function(user) {
+      $rootScope.user = user;
       $ionicPopup.alert({
         title: 'Success',
         template: simSerialNumber + ' registered successfully.'

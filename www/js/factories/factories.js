@@ -1,4 +1,4 @@
-module('yatayat.factories')
+ngModule('yatayat.factories')
 
 .factory('Loading', ['$ionicLoading', function($ionicLoading) {
   return {

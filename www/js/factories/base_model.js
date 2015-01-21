@@ -1,4 +1,4 @@
-module('yatayat.factories')
+ngModule('yatayat.factories')
 
 .factory('BaseModel', [function() {
   return {

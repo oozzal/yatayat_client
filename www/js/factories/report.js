@@ -1,4 +1,4 @@
-module('yatayat.factories')
+ngModule('yatayat.factories')
 
 .factory('Report', ['BaseModel', 'Raven', '$q', function(BaseModel, Raven, $q) {
 

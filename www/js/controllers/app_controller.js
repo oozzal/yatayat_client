@@ -1,4 +1,4 @@
-module('yatayat.controllers')
+ngModule('yatayat.controllers')
 
 .controller('AppCtrl', ['$scope', '$rootScope', 'Modal', '$timeout', function($scope, $rootScope, Modal, $timeout) {
   // Form data for the login modal
