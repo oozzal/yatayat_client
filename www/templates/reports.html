@@ -3,11 +3,15 @@
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="refresh()"
+    ></ion-refresher>
     <ion-list>
-      <ion-item ng-repeat="report in reports" class="item item-thumbnail-left" type="item-text-wrap" href="#/app/reports/{{report.id}}">
+      <ion-item ng-repeat="report in reports" class="item item-thumbnail-left" href="#/app/reports/{{report.id}}">
         <img ng-src="{{ report.image || 'img/default.png' }}">
         <h2 ng-bind="report.category.name"></h2>
-        <p ng-bind="report.message"></p>
+        <p class="item-text-wrap" ng-bind="report.message"></p>
         <button
           class="button button-small button-balanced icon icon-right ion-thumbsup"
           ng-click="likeReport($index, $event)"

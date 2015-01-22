@@ -1,10 +1,18 @@
 ngModule('yatayat.controllers')
 
 .controller('ReportsCtrl', ['$scope', '$rootScope', 'Report', function($scope, $rootScope, Report) {
-  Report.all()
-  .then(function(data) {
-    $scope.reports = data;
-  });
+  $scope.getReports = function(refresh) {
+    console.log("Refresh: " + refresh);
+    Report.all()
+    .then(function(data) {
+      $scope.reports = data;
+      refresh && $scope.$broadcast('scroll.refreshComplete');
+    });
+  };
+
+  $scope.refresh = function() {
+    $scope.getReports(true);
+  };
 
   $scope.likeReport = function($index, $event) {
     $event.preventDefault();
@@ -27,5 +35,7 @@ ngModule('yatayat.controllers')
   $scope.editReport = function($index, $event) {
     $event.preventDefault();
   };
+
+  $scope.getReports();
 }])
 
