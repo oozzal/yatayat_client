@@ -4,8 +4,7 @@
       <div class="item item-text-wrap">
         <h2 ng-bind="report.category.name"></h2>
         <p ng-bind="report.message"></p>
-      </div>
-      <div class="item item-text-wrap">
+        <br />
         <i class="icon ion-location"></i> {{ report.location.name }} &nbsp;
         <i class="icon ion-clock"></i> {{ report.created_at | date: 'medium' }} &nbsp;
         <br />
