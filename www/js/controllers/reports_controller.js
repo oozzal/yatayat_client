@@ -26,7 +26,7 @@ ngModule('yatayat.controllers')
   $scope.dislikeReport = function($index, $event) {
     $event.preventDefault();
     var report = $scope.reports[$index];
-    Report.like(report, $rootScope.user)
+    Report.dislike(report, $rootScope.user)
     .then(function() {
       report.cached_votes_down = report.cached_votes_down + 1;
     });

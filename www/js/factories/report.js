@@ -61,6 +61,17 @@ ngModule('yatayat.factories')
       return defer.promise;
     },
 
+    dislike: function(report, user) {
+      var defer = $q.defer();
+
+      Raven.post('reports/dislike/', {id: report.id, sim_serial_number: user.sim_serial_number})
+      .then(function(data) {
+        defer.resolve(data);
+      });
+
+      return defer.promise;
+    },
+
     length: function() {
       return this.body.length;
     }
