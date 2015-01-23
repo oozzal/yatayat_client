@@ -37,7 +37,7 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
       $rootScope.user = user;
       Router.go('app.reports', true)
       .then(function() {
-        UiHelper.showToast('Welcome back!', 3000, 'bottom');
+        UiHelper.showToast('Welcome back!');
       });
     });
 
@@ -128,12 +128,12 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
       cache: false
     })
 
-    .state('app.search', {
-      url: '/search',
+    .state('app.profile', {
+      url: '/profile',
       views: {
         'menuContent' :{
-          templateUrl: 'templates/search.html',
-          controller: 'SearchCtrl'
+          templateUrl: 'templates/profile.html',
+          controller: 'UserCtrl'
         }
       }
     })

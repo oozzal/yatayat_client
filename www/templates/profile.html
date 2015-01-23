@@ -1,0 +1,37 @@
+<ion-view title="Submit Report">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <ul class="list">
+      <li class="item item-input item-stacked-label">
+        <span class="input-label">Username</span>
+        <input type="text" ng-model="user.username" placeholder="Please enter your username">
+      </li>
+      <li class="item item-input item-stacked-label">
+        <span class="input-label">Phone Number</span>
+        <input type="text" ng-model="user.phone_number" placeholder="Please enter your phone number">
+      </li>
+      <li class="item item-input item-stacked-label">
+        <span class="input-label">Email</span>
+        <input type="email" ng-model="user.email" placeholder="Please enter your email">
+      </li>
+      <li class="item item-input item-stacked-label">
+        <span class="input-label">First Name</span>
+        <input type="text" ng-model="user.first_name" placeholder="Please enter your first name">
+      </li>
+      <li class="item item-input item-stacked-label">
+        <span class="input-label">Last Name</span>
+        <input type="text" ng-model="user.last_name" placeholder="Please enter your last name">
+      </li>
+      <li class="item item-input item-stacked-label">
+        <span class="input-label">Address</span>
+        <input type="text" ng-model="user.address" placeholder="Please enter your address">
+      </li>
+    </ul>
+    <button class="button button-block button-royal" ng-click="updateProfile()">
+      Save
+    </button>
+  </ion-content>
+</ion-view>
+

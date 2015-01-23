@@ -22,7 +22,10 @@ ngModule('yatayat.controllers')
   $scope.createReport = function() {
     Report.create($scope.report)
     .then(function() {
-      Router.go('app.reports', false, true);
+      Router.go('app.reports', false, true)
+      .then(function() {
+        UiHelper.showToast('Report Created Successfully!');
+      });
     });
   };
 
@@ -36,7 +39,7 @@ ngModule('yatayat.controllers')
       $scope.createReport();
     }, function() {
       $rootScope.$broadcast('loading:hide');
-      UiHelper.showToast('Could not get location.', 3000, 'bottom');
+      UiHelper.showToast('Could not get location.');
     });
   };
 

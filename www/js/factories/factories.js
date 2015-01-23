@@ -22,6 +22,8 @@ ngModule('yatayat.factories')
 
   return {
     showToast: function(msg, duration, position) {
+      duration = duration || 3000;
+      position = position || 'bottom';
       if(window.cordova) {
         duration = duration > 1000 ? 'long' : 'short';
         $cordovaToast.show(message, duration, position);

@@ -2,7 +2,6 @@ ngModule('yatayat.controllers')
 
 .controller('ReportsCtrl', ['$scope', '$rootScope', 'Report', function($scope, $rootScope, Report) {
   $scope.getReports = function(refresh) {
-    console.log("Refresh: " + refresh);
     Report.all()
     .then(function(data) {
       $scope.reports = data;

@@ -16,7 +16,7 @@ ngModule('yatayat.controllers')
       }).then(function() {
         Router.go('app.reports', true)
         .then(function() {
-          UiHelper.showToast('Welcome!', 3000, 'bottom');
+          UiHelper.showToast('Welcome!');
         });
       });
     });
