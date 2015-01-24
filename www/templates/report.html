@@ -4,13 +4,33 @@
       <div class="item item-text-wrap">
         <h2 ng-bind="report.category.name"></h2>
         <p ng-bind="report.message"></p>
+        <button
+          class="button button-small button-outline button-balanced icon icon-left ion-thumbsup"
+          ng-click="likeReport($index, $event)"
+          ng-bind="report.cached_votes_up">
+        </button>
+        <button
+          class="button button-small button-outline button-assertive icon icon-left ion-thumbsdown"
+          ng-click="dislikeReport($index, $event)"
+          ng-bind="report.cached_votes_down">
+        </button>
         <br />
-        <i class="icon ion-location"></i> {{ report.location.name }} &nbsp;
-        <i class="icon ion-clock"></i> {{ report.created_at | date: 'medium' }} &nbsp;
         <br />
-        <i class="icon ion-person"></i> {{ report.user.username || 'Anonymous' }}
-        <i class="icon ion-thumbsup" ng-bind="report.user.cached_votes_up"></i>
-        <i class="icon ion-thumbsdown" ng-bind="report.user.cached_votes_down"></i>
+        <p>
+          <i class="icon ion-location"></i> {{ report.location.name }} &nbsp;
+          <i class="icon ion-clock"></i> {{ report.created_at | date: 'medium' }} &nbsp;
+          <br />
+          <i class="icon ion-person"></i> {{ report.user.username || 'Anonymous' }}
+          <button
+            class="button button-small button-clear button-balanced icon icon-left ion-thumbsup"
+            ng-bind="report.user.cached_votes_up">
+          </button>
+          <button
+            class="button button-small button-clear button-assertive icon icon-left ion-thumbsdown"
+            ng-bind="report.user.cached_votes_down">
+          </button>
+
+        </p>
       </div>
       <div class="item">
         <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options">

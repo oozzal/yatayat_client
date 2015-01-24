@@ -1,6 +1,9 @@
 ngModule('yatayat.controllers')
 
 .controller('ReportsCtrl', ['$scope', '$rootScope', 'Report', function($scope, $rootScope, Report) {
+
+  $scope.data = {};
+
   $scope.getReports = function(refresh) {
     Report.all()
     .then(function(data) {
@@ -11,6 +14,21 @@ ngModule('yatayat.controllers')
 
   $scope.refresh = function() {
     $scope.getReports(true);
+  };
+
+  $scope.search = function(query) {
+    var regex = new RegExp(query, 'i');
+    return function(report) {
+      return report.category.name.match(regex)
+             || report.message.match(regex)
+             || report.location.name.match(regex)
+             || report.user.username.match(regex)
+             || report.created_at.match(regex);
+    };
+  };
+
+  $scope.clearSearch = function() {
+    $scope.data.searchQuery = '';
   };
 
   $scope.likeReport = function($index, $event) {
