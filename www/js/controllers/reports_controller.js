@@ -20,9 +20,9 @@ ngModule('yatayat.controllers')
     var regex = new RegExp(query, 'i');
     return function(report) {
       return report.category.name.match(regex)
-             || report.message.match(regex)
+             || (report.message && report.message.match(regex))
              || report.location.name.match(regex)
-             || report.user.username.match(regex)
+             || (report.user.username && report.user.username.match(regex))
              || report.created_at.match(regex);
     };
   };
