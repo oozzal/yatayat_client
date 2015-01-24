@@ -9,6 +9,8 @@
         <i class="icon ion-clock"></i> {{ report.created_at | date: 'medium' }} &nbsp;
         <br />
         <i class="icon ion-person"></i> {{ report.user.username || 'Anonymous' }}
+        <i class="icon ion-thumbsup" ng-bind="report.user.cached_votes_up"></i>
+        <i class="icon ion-thumbsdown" ng-bind="report.user.cached_votes_down"></i>
       </div>
       <div class="item">
         <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options">

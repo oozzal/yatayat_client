@@ -13,12 +13,12 @@
         <h2 ng-bind="report.category.name"></h2>
         <p class="item-text-wrap" ng-bind="report.message"></p>
         <button
-          class="button button-small button-balanced icon icon-right ion-thumbsup"
+          class="button button-small button-balanced icon icon-left ion-thumbsup"
           ng-click="likeReport($index, $event)"
           ng-bind="report.cached_votes_up">
         </button>
         <button
-          class="button button-small button-assertive icon icon-right ion-thumbsdown"
+          class="button button-small button-assertive icon icon-left ion-thumbsdown"
           ng-click="dislikeReport($index, $event)"
           ng-bind="report.cached_votes_down">
         </button>
@@ -29,6 +29,8 @@
           <i class="icon ion-clock"></i> {{ report.created_at | date: 'medium' }}
           <br />
           <i class="icon ion-person"></i> {{ report.user.username || 'Anonymous' }}
+          <i class="icon ion-thumbsup" ng-bind="report.user.cached_votes_up"></i>
+          <i class="icon ion-thumbsdown" ng-bind="report.user.cached_votes_down"></i>
         </p>
       </ion-item>
     </ion-list>

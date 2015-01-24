@@ -5,16 +5,16 @@ var controllers = [
   'js/controllers/app_controller.js',
   'js/controllers/report_controller.js',
   'js/controllers/reports_controller.js',
-  'js/controllers/search_controller.js',
   'js/controllers/start_controller.js',
-  'js/controllers/submit_controller.js'
+  'js/controllers/submit_controller.js',
+  'js/controllers/user_controller.js'
 ];
 
 var factories = [
   'js/factories/base_model.js',
   'js/factories/factories.js',
-  'js/factories/report.js',
   'js/factories/raven.js',
+  'js/factories/report.js',
   'js/factories/sim.js',
   'js/factories/user.js'
 ];

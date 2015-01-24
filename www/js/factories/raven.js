@@ -2,9 +2,9 @@ ngModule('yatayat.factories')
 
 .factory('Raven', ['$http', '$q', function($http, $q) {
   // var baseUrl = 'http://192.168.56.1:3000/';
-  // var baseUrl = 'http://localhost:3000/';
+  var baseUrl = 'http://localhost:3000/';
   // var baseUrl = 'http://0.0.0.0:3000/';
-  var baseUrl = 'http://yatayat.herokuapp.com/';
+  // var baseUrl = 'http://yatayat.herokuapp.com/';
   return {
     get: function(path) {
       var defer = $q.defer();

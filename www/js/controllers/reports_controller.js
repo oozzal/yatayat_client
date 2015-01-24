@@ -17,8 +17,10 @@ ngModule('yatayat.controllers')
     $event.preventDefault();
     var report = $scope.reports[$index];
     Report.like(report, $rootScope.user)
-    .then(function() {
-      report.cached_votes_up = report.cached_votes_up + 1;
+    .then(function(resp) {
+      report.cached_votes_up = resp.cached_votes_up;
+      report.cached_votes_down = resp.cached_votes_down;
+      $scope.refresh();
     });
   };
 
@@ -26,8 +28,10 @@ ngModule('yatayat.controllers')
     $event.preventDefault();
     var report = $scope.reports[$index];
     Report.dislike(report, $rootScope.user)
-    .then(function() {
-      report.cached_votes_down = report.cached_votes_down + 1;
+    .then(function(resp) {
+      report.cached_votes_down = resp.cached_votes_down;
+      report.cached_votes_up = resp.cached_votes_up;
+      $scope.refresh();
     });
   };
 
