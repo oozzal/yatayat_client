@@ -37,25 +37,29 @@ ngModule('yatayat.factories')
 .factory('Settings', ['LocalStorage', function(LocalStorage) {
   return {
     all: function() {
-      return { user_location: this.userLocation(), pushNotification: this.pushNotification() };
+      return { userLocation: this.userLocation(), pushNotification: this.pushNotification() };
+    },
+
+    set: function(key, value) {
+      LocalStorage.set(key, value);
     },
 
     setMultiple: function(obj) {
       for(key in obj) {
-        obj.hasOwnProperty(key) && this.setOne(key, obj[key]);
+        obj.hasOwnProperty(key) && this.set(key, obj[key]);
       }
     },
 
-    setOne: function(key, value) {
-      LocalStorage.set(key, value);
+    userRegistered: function() {
+      return LocalStorage.get('user_registered');
     },
 
     userLocation: function() {
-      return LocalStorage.get('user_location') || 'nep';
+      return LocalStorage.get('user_location');
     },
 
     pushNotification: function() {
-      return LocalStorage.get('push_notification') || 'eng';
+      return LocalStorage.get('push_notification');
     }
   };
 }])
