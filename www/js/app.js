@@ -137,7 +137,8 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
           templateUrl: 'templates/profile.html',
           controller: 'UserCtrl'
         }
-      }
+      },
+      cache: false
     })
 
     .state('app.user_details', {
@@ -147,7 +148,8 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
           templateUrl: 'templates/user_details.html',
           controller: 'UserDetailsCtrl'
         }
-      }
+      },
+      cache: false
     })
 
 }])
