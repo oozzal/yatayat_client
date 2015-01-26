@@ -55,11 +55,14 @@ ngModule('yatayat.controllers')
 
   $scope.deleteReport = function($index, $event) {
     $event.preventDefault();
-    var report = $scope.reports[$index];
-    Report.destroy(report.id)
-    .then(function(resp) {
-      $scope.refresh();
-      UiHelper.showToast('Report Deleted Successfully!');
+    UiHelper.confirm()
+    .then(function(res) {
+      var report = $scope.reports[$index];
+      Report.destroy(report.id)
+      .then(function(resp) {
+        $scope.refresh();
+        UiHelper.showToast('Report Deleted Successfully!');
+      });
     });
   };
 

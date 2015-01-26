@@ -1,6 +1,6 @@
 ngModule('yatayat.controllers')
 
-.controller('ReportCtrl', ['$scope', '$rootScope', '$stateParams', 'Report', 'uiGmapGoogleMapApi', 'Router', function($scope, $rootScope, $stateParams, Report, uiGmapGoogleMapApi, Router) {
+.controller('ReportCtrl', ['$scope', '$rootScope', '$stateParams', 'Report', 'uiGmapGoogleMapApi', 'Router', 'UiHelper', function($scope, $rootScope, $stateParams, Report, uiGmapGoogleMapApi, Router, UiHelper) {
   $scope.report = {};
 
   Report.get($stateParams.reportId)
@@ -41,9 +41,12 @@ ngModule('yatayat.controllers')
   };
 
   $scope.deleteReport = function() {
-    Report.destroy($scope.report.id)
-    .then(function(resp) {
-      Router.go('app.reports');
+    UiHelper.confirm()
+    .then(function(res) {
+      Report.destroy($scope.report.id)
+      .then(function(resp) {
+        Router.go('app.reports');
+      });
     });
   };
 }])

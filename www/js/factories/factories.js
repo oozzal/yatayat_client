@@ -17,8 +17,8 @@ ngModule('yatayat.factories')
 }])
 
 .factory('UiHelper', [
-          '$cordovaToast', 'Loading',
-  function($cordovaToast,   Loading) {
+          '$cordovaToast', 'Loading', '$ionicPopup', '$q',
+  function($cordovaToast,   Loading,   $ionicPopup,   $q) {
 
   return {
     showToast: function(msg, duration, position) {
@@ -30,6 +30,20 @@ ngModule('yatayat.factories')
       } else {
         Loading.showWithOptions({ template: msg, noBackdrop: true, duration: duration });
       }
+    },
+
+    confirm: function() {
+      var defer = $q.defer();
+
+      $ionicPopup.confirm({
+        title: 'Confirm',
+        template: 'Are you sure?'
+      }).then(function(res) {
+        if(res) defer.resolve();
+        else defer.reject();
+      });
+
+      return defer.promise;
     }
   };
 }])
