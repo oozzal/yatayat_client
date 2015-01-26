@@ -20,9 +20,14 @@
         <i class="icon ion-eye"></i>{{ detailedUser.role || 'user' }}
       </a>
     </div>
-    <div ng-show="user.role==='super_admin' && detailedUser.role!=='admin'">
+    <div ng-show="user.role==='super_admin' && detailedUser.role!=='admin' && detailedUser.role!=='super_admin'">
       <button class="button button-block button-royal" ng-click="makeAdmin()">
         Make Admin
+      </button>
+    </div>
+    <div ng-show="user.role==='super_admin' && detailedUser.role=='admin'">
+      <button class="button button-block button-royal" ng-click="removeAdmin()">
+        Remove Admin
       </button>
     </div>
   </ion-content>
