@@ -101,7 +101,7 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
     .state('app.reports', {
       url: '/reports',
       views: {
-        'menuContent' :{
+        'menuContent': {
           templateUrl: 'templates/reports.html',
           controller: 'ReportsCtrl'
         }
@@ -112,7 +112,7 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
     .state('app.report', {
       url: '/reports/:reportId',
       views: {
-        'menuContent' :{
+        'menuContent': {
           templateUrl: 'templates/report.html',
           controller: 'ReportCtrl'
         }
@@ -122,7 +122,7 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
     .state('app.submit', {
       url: '/submit',
       views: {
-        'menuContent' :{
+        'menuContent': {
           templateUrl: 'templates/submit.html',
           controller: 'SubmitCtrl'
         }
@@ -133,11 +133,22 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
     .state('app.profile', {
       url: '/profile',
       views: {
-        'menuContent' :{
+        'menuContent': {
           templateUrl: 'templates/profile.html',
           controller: 'UserCtrl'
         }
       }
     })
 
+    .state('app.user_details', {
+      url: '/user_details/:userId',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/user_details.html',
+          controller: 'UserDetailsCtrl'
+        }
+      }
+    })
+
 }])
+

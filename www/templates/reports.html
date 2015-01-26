@@ -24,7 +24,7 @@
         <img ng-src="{{ report.image || 'img/default.png' }}">
         <h2 ng-bind="report.category.name"></h2>
         <p class="item-text-wrap" ng-bind="report.message"></p>
-        <span ng-show="user.canDestroyReport()">
+        <span ng-show="user.role==='admin' || user.role==='super_admin'">
           <button
             class="button button-small button-outline button-assertive icon ion-trash-a"
             ng-click="deleteReport($index, $event)">
@@ -49,7 +49,9 @@
             <i class="icon ion-clock"></i> {{ report.created_at | date: 'medium' }}
           </span>
           <br />
-          <i class="icon ion-person"></i> {{ report.user.username || 'Anonymous' }}
+          <a ng-href="#/app/user_details/{{report.user_id}}">
+            <i class="icon ion-person"></i> {{ report.user.username || 'Anonymous' }}
+          </a>
           <button
             class="button button-small button-clear button-balanced icon icon-left ion-thumbsup"
             ng-bind="report.user.cached_votes_up">

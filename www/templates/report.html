@@ -4,7 +4,7 @@
       <div class="item item-text-wrap">
         <h2 ng-bind="report.category.name"></h2>
         <p ng-bind="report.message"></p>
-        <span ng-show="user.role=='admin' || user.role=='super_admin'">
+        <span ng-show="user.role==='admin' || user.role==='super_admin'">
           <button
             class="button button-small button-outline button-assertive icon ion-trash-a"
             ng-click="deleteReport()">
@@ -26,7 +26,9 @@
           <i class="icon ion-location"></i> {{ report.location.name }} &nbsp;
           <i class="icon ion-clock"></i> {{ report.created_at | date: 'medium' }} &nbsp;
           <br />
-          <i class="icon ion-person"></i> {{ report.user.username || 'Anonymous' }}
+          <a ng-href="#/app/user_details/{{report.user_id}}">
+            <i class="icon ion-person"></i> {{ report.user.username || 'Anonymous' }}
+          </a>
           <button
             class="button button-small button-clear button-balanced icon icon-left ion-thumbsup"
             ng-bind="report.user.cached_votes_up">

@@ -7,7 +7,8 @@ var controllers = [
   'js/controllers/reports_controller.js',
   'js/controllers/start_controller.js',
   'js/controllers/submit_controller.js',
-  'js/controllers/user_controller.js'
+  'js/controllers/user_controller.js',
+  'js/controllers/user_details_controller.js'
 ];
 
 var factories = [

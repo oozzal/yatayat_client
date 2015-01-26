@@ -1,6 +1,6 @@
 ngModule('yatayat.factories')
 
-.factory('Report', ['BaseModel', 'Raven', '$q', function(BaseModel, Raven, $q) {
+.factory('Report', ['BaseModel', 'User', 'Raven', '$q', function(BaseModel, User, Raven, $q) {
 
   return angular.extend(BaseModel, {
     all: function() {
@@ -10,6 +10,7 @@ ngModule('yatayat.factories')
       Raven.get('reports')
       .then(function(reports) {
         angular.forEach(reports, function(report) {
+          // report.user = User.build(report.user);
           data.push(BaseModel.build(report));
         });
         defer.resolve(data);
@@ -25,9 +26,10 @@ ngModule('yatayat.factories')
 
       Raven.get('reports/' + id)
       .then(function(report) {
+        // report.user = User.build(report.user);
         defer.resolve(BaseModel.build(report));
-      }, function() {
-        defer.reject();
+      }, function(error) {
+        defer.reject(error);
       });
 
       return defer.promise;
@@ -43,8 +45,8 @@ ngModule('yatayat.factories')
         } else {
           defer.reject();
         }
-      }, function() {
-        defer.reject();
+      }, function(error) {
+        defer.reject(error);
       });
 
       return defer.promise;
