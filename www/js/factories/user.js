@@ -1,18 +1,19 @@
 ngModule('yatayat.factories')
 
-.factory('User', ['Raven', '$q', 'Sim', 'LocalStorage', function(Raven, $q, Sim, LocalStorage) {
-  return {
+.factory('User', ['BaseModel', 'Raven', '$q', 'Sim', 'LocalStorage', function(BaseModel, Raven, $q, Sim, LocalStorage) {
+  return angular.extend(BaseModel, {
     checkRegistration: function() {
       var defer = $q.defer();
       var user = LocalStorage.getObject('user');
       if(user.sim_serial_number) {
-        defer.resolve(user);
+        defer.resolve(BaseModel.build(user));
       } else {
         Sim.getDetails()
         .then(function(result) {
           Raven.get('users/' + result.simSerialNumber)
           .then(function(user) {
             if(user && user.id) {
+              user = BaseModel.build(user);
               defer.resolve(user);
               LocalStorage.setObject('user', user);
             } else {
@@ -66,7 +67,19 @@ ngModule('yatayat.factories')
       });
 
       return defer.promise;
+    },
+
+    isAdmin: function() {
+      return this.role == 'admin';
+    },
+
+    isSuperAdmin: function() {
+      return this.role == 'super_admin';
+    },
+
+    canDestroyReport: function() {
+      return this.isAdmin() || this.isSuperAdmin();
     }
-  }
+  }); // end angular.extend
 }])
 

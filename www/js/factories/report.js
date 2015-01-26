@@ -72,6 +72,19 @@ ngModule('yatayat.factories')
       return defer.promise;
     },
 
+    destroy: function(id) {
+      var defer = $q.defer();
+
+      Raven.post('reports/destroy', {id: id})
+      .then(function(data) {
+        defer.resolve(data);
+      }, function(error) {
+        defer.reject(error);
+      });
+
+      return defer.promise;
+    },
+
     length: function() {
       return this.body.length;
     }

@@ -1,10 +1,12 @@
 ngModule('yatayat.factories')
 
 .factory('Raven', ['$http', '$q', function($http, $q) {
-  // var baseUrl = 'http://192.168.56.1:3000/';
-  // var baseUrl = 'http://localhost:3000/';
-  // var baseUrl = 'http://0.0.0.0:3000/';
-  var baseUrl = 'http://yatayat.herokuapp.com/';
+  var baseUrl;
+  if(typeof cordova == 'undefined') {
+    baseUrl = 'http://localhost:3000/';
+  } else {
+    baseUrl = 'http://yatayat.herokuapp.com/';
+  }
   return {
     get: function(path) {
       var defer = $q.defer();
@@ -14,8 +16,8 @@ ngModule('yatayat.factories')
         method: 'GET'
       }).then(function(result) {
         defer.resolve(result.data);
-      }, function() {
-        defer.reject();
+      }, function(error) {
+        defer.reject(error.data);
       });
 
       return defer.promise;
@@ -30,8 +32,8 @@ ngModule('yatayat.factories')
         data: $.param(data),
       }).then(function(result) {
         defer.resolve(result.data);
-      }, function() {
-        defer.reject();
+      }, function(error) {
+        defer.reject(error.data);
       });
 
       return defer.promise;

@@ -53,6 +53,8 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
   // $httpProvider.defaults.headers.post = {};
   // $httpProvider.defaults.headers.put = {};
   // $httpProvider.defaults.headers.patch = {};
+  // $httpProvider.defaults.headers.delete = {};
+
   // Unified loading when http request made
   $httpProvider.interceptors.push(function($rootScope) {
    return {

@@ -24,6 +24,12 @@
         <img ng-src="{{ report.image || 'img/default.png' }}">
         <h2 ng-bind="report.category.name"></h2>
         <p class="item-text-wrap" ng-bind="report.message"></p>
+        <span ng-show="user.canDestroyReport()">
+          <button
+            class="button button-small button-outline button-assertive icon ion-trash-a"
+            ng-click="deleteReport($index, $event)">
+          </button>
+        </span>
         <button
           class="button button-small button-outline button-balanced icon icon-left ion-thumbsup"
           ng-click="likeReport($index, $event)"

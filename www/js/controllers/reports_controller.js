@@ -1,6 +1,6 @@
 ngModule('yatayat.controllers')
 
-.controller('ReportsCtrl', ['$scope', '$rootScope', 'Report', function($scope, $rootScope, Report) {
+.controller('ReportsCtrl', ['$scope', '$rootScope', 'Report', 'UiHelper', function($scope, $rootScope, Report, UiHelper) {
 
   $scope.data = {};
 
@@ -50,6 +50,16 @@ ngModule('yatayat.controllers')
       report.cached_votes_down = resp.cached_votes_down;
       report.cached_votes_up = resp.cached_votes_up;
       $scope.refresh();
+    });
+  };
+
+  $scope.deleteReport = function($index, $event) {
+    $event.preventDefault();
+    var report = $scope.reports[$index];
+    Report.destroy(report.id)
+    .then(function(resp) {
+      $scope.refresh();
+      UiHelper.showToast('Report Deleted Successfully!');
     });
   };
 

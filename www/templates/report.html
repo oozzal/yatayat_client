@@ -4,14 +4,20 @@
       <div class="item item-text-wrap">
         <h2 ng-bind="report.category.name"></h2>
         <p ng-bind="report.message"></p>
+        <span ng-show="user.role=='admin' || user.role=='super_admin'">
+          <button
+            class="button button-small button-outline button-assertive icon ion-trash-a"
+            ng-click="deleteReport()">
+          </button>
+        </span>
         <button
           class="button button-small button-outline button-balanced icon icon-left ion-thumbsup"
-          ng-click="likeReport($index, $event)"
+          ng-click="likeReport()"
           ng-bind="report.cached_votes_up">
         </button>
         <button
           class="button button-small button-outline button-assertive icon icon-left ion-thumbsdown"
-          ng-click="dislikeReport($index, $event)"
+          ng-click="dislikeReport()"
           ng-bind="report.cached_votes_down">
         </button>
         <br />
