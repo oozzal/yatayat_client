@@ -20,15 +20,31 @@
         <i class="icon ion-eye"></i>{{ detailedUser.role || 'user' }}
       </a>
     </div>
-    <div ng-show="user.role==='super_admin' && detailedUser.role!=='admin' && detailedUser.role!=='super_admin'">
-      <button class="button button-block button-royal" ng-click="makeAdmin()">
-        Make Admin
-      </button>
-    </div>
-    <div ng-show="user.role==='super_admin' && detailedUser.role=='admin'">
-      <button class="button button-block button-royal" ng-click="removeAdmin()">
-        Remove Admin
-      </button>
+    <div ng-show="user.role=='super_admin'">
+      <div ng-show="detailedUser.role!=='blocked'">
+        <div ng-show="detailedUser.role==='admin'">
+          <button class="button button-block button-royal" ng-click="updateUserRole('user')">
+            Remove Admin
+          </button>
+        </div> <!-- detailedUser.role === 'admin' -->
+        <div ng-show="detailedUser.role!=='super_admin'">
+          <div ng-show="detailedUser.role!=='admin'">
+            <button class="button button-block button-royal" ng-click="updateUserRole('admin')">
+              Make Admin
+            </button>
+          </div>
+
+          <button class="button button-block button-royal" ng-click="updateUserRole('blocked')">
+            Block User
+          </button>
+        </div> <!-- detailedUser.role !== 'super_admin' -->
+      </div> <!-- detailedUser.role !== 'blocked' -->
+
+      <div ng-show="detailedUser.role==='blocked'">
+        <button class="button button-block button-royal" ng-click="updateUserRole('user')">
+          Unblock User
+        </button>
+      </div>
     </div>
   </ion-content>
 </ion-view>

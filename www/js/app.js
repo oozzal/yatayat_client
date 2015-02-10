@@ -31,6 +31,10 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
       Loading.hide();
     })
 
+    $rootScope.$on('broadcast:message', function(event, message) {
+      UiHelper.showToast(message);
+    })
+
     // Always get the user and save in rootScope
     User.checkRegistration()
     .then(function(user) {
@@ -45,15 +49,17 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
 }])
 
 .config(['$httpProvider', function ($httpProvider) {
-  // fix for $http.post not sending data
-  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
   // Reset headers to avoid OPTIONS request (aka preflight)
   // $httpProvider.defaults.headers.common = {};
   // $httpProvider.defaults.headers.post = {};
   // $httpProvider.defaults.headers.put = {};
   // $httpProvider.defaults.headers.patch = {};
   // $httpProvider.defaults.headers.delete = {};
+
+  // fix for $http.post not sending data
+  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+  // $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded';
+  // $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
   // Unified loading when http request made
   $httpProvider.interceptors.push(function($rootScope) {
@@ -74,7 +80,7 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
   uiGmapGoogleMapApiProvider.configure({
     key: 'AIzaSyB09h4QtoxL3alFV4JDzArJYDjoltix4r0',
     v: '3.17',
-    libraries: 'weather,geometry,visualization',
+    // libraries: 'weather,geometry,visualization',
     // china: true
   });
 
@@ -102,7 +108,7 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
       url: '/reports',
       views: {
         'menuContent': {
-          templateUrl: 'templates/reports.html',
+          templateUrl: 'templates/reports/index.html',
           controller: 'ReportsCtrl'
         }
       },
@@ -113,18 +119,29 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
       url: '/reports/:reportId',
       views: {
         'menuContent': {
-          templateUrl: 'templates/report.html',
+          templateUrl: 'templates/reports/show.html',
           controller: 'ReportCtrl'
         }
       }
     })
 
-    .state('app.submit', {
-      url: '/submit',
+    .state('app.submit_report', {
+      url: '/submit_report',
       views: {
         'menuContent': {
-          templateUrl: 'templates/submit.html',
-          controller: 'SubmitCtrl'
+          templateUrl: 'templates/reports/submit.html',
+          controller: 'ReportSubmitCtrl'
+        }
+      },
+      cache: false
+    })
+
+    .state('app.edit_report', {
+      url: '/edit_report/:reportId',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/reports/edit.html',
+          controller: 'ReportEditCtrl'
         }
       },
       cache: false

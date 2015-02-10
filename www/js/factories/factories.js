@@ -32,12 +32,12 @@ ngModule('yatayat.factories')
       }
     },
 
-    confirm: function() {
+    confirm: function(title, template) {
       var defer = $q.defer();
 
       $ionicPopup.confirm({
-        title: 'Confirm',
-        template: 'Are you sure?'
+        title: title || 'Confirm',
+        template: template || 'Are you sure?'
       }).then(function(res) {
         if(res) defer.resolve();
         else defer.reject();

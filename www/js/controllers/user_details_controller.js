@@ -8,23 +8,16 @@ ngModule('yatayat.controllers')
     $scope.detailedUser = detailedUser;
   });
 
-  $scope.makeAdmin = function() {
-    $scope.detailedUser.role = 'admin';
-    User.update($scope.detailedUser)
-    .then(function(user) {
-      Router.go('app.reports', false, true);
-    }, function(error) {
-      UiHelper.showToast("Can't Make Admin");
-    });
-  };
-
-  $scope.removeAdmin = function() {
-    $scope.detailedUser.role = 'user';
-    User.update($scope.detailedUser)
-    .then(function(user) {
-      Router.go('app.reports', false, true);
-    }, function(error) {
-      UiHelper.showToast("Can't Remove Admin");
+  $scope.updateUserRole = function(role) {
+    UiHelper.confirm('Change User Role?')
+    .then(function() {
+      $scope.detailedUser.role = role;
+      User.update($scope.detailedUser)
+      .then(function(user) {
+        Router.go('app.reports', false, true);
+      }, function(error) {
+        UiHelper.showToast("Something Went Wrong!");
+      });
     });
   };
 }])

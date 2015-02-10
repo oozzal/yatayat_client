@@ -52,12 +52,29 @@ ngModule('yatayat.factories')
       return defer.promise;
     },
 
+    update: function(report) {
+      // if(!report) return false;
+
+      var defer = $q.defer();
+
+      Raven.post('reports/update', { report: report })
+      .then(function() {
+        defer.resolve();
+      }, function(error) {
+        defer.reject(error);
+      });
+
+      return defer.promise;
+    },
+
     like: function(report, user) {
       var defer = $q.defer();
 
-      Raven.post('reports/like/', {id: report.id, sim_serial_number: user.sim_serial_number})
+      Raven.post('reports/like', {id: report.id, sim_serial_number: user.sim_serial_number})
       .then(function(data) {
         defer.resolve(data);
+      }, function(error) {
+        defer.reject(error);
       });
 
       return defer.promise;
@@ -66,7 +83,7 @@ ngModule('yatayat.factories')
     dislike: function(report, user) {
       var defer = $q.defer();
 
-      Raven.post('reports/dislike/', {id: report.id, sim_serial_number: user.sim_serial_number})
+      Raven.post('reports/dislike', {id: report.id, sim_serial_number: user.sim_serial_number})
       .then(function(data) {
         defer.resolve(data);
       });

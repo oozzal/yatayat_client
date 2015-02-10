@@ -1,0 +1,22 @@
+<ion-view title="Edit Report">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <ul class="list">
+      <li class="item item-input item-select">
+        <span class="input-label">What happened?</span>
+        <select ng-model="report.category" ng-options="category.name for category in categories">
+        </select>
+      </li>
+      <li class="item item-input item-stacked-label">
+        <span class="input-label">Can you describe the scene?</span>
+        <input type="text" ng-model="report.message" placeholder="Bike hit by a truck">
+      </li>
+    </ul>
+    <button class="button button-block button-royal" ng-click="updateReport()">
+      Save
+    </button>
+  </ion-content>
+</ion-view>
+

@@ -1,5 +1,5 @@
 ngModule('yatayat.controllers')
-.controller('SubmitCtrl', ['$scope', '$rootScope', 'Report', 'Router', '$cordovaGeolocation', 'Raven', 'UiHelper', function($scope, $rootScope, Report, Router, $cordovaGeolocation, Raven, UiHelper) {
+.controller('ReportSubmitCtrl', ['$scope', '$rootScope', 'Report', 'Router', '$cordovaGeolocation', 'Raven', 'UiHelper', function($scope, $rootScope, Report, Router, $cordovaGeolocation, Raven, UiHelper) {
 
   $scope.report = {
     location: {}

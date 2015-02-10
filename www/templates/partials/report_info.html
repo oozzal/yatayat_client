@@ -1,0 +1,19 @@
+<p>
+  <span class="item-text-wrap">
+    <i class="icon ion-location"></i> {{ report.location.name }}
+    <br />
+    <i class="icon ion-clock"></i> {{ report.created_at | date: 'medium' }}
+  </span>
+  <br />
+  <a ng-href="#/app/user_details/{{report.user_id}}">
+    <i class="icon ion-person"></i> {{ report.user.username || 'Anonymous' }}
+  </a>
+  <button
+    class="button button-small button-clear button-balanced icon icon-left ion-thumbsup"
+    ng-bind="report.user.cached_votes_up">
+  </button>
+  <button
+    class="button button-small button-clear button-assertive icon icon-left ion-thumbsdown"
+    ng-bind="report.user.cached_votes_down">
+  </button>
+</p>

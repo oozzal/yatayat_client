@@ -1,0 +1,19 @@
+<ion-view title="Post">
+  <ion-content class="has-header">
+    <div class="card">
+      <div class="item item-text-wrap">
+        <h2 ng-bind="report.category.name"></h2>
+        <p ng-bind="report.message"></p>
+        <ng-include src="'templates/partials/control_buttons.html'"></ng-include>
+        <ng-include src="'templates/partials/report_info.html'"></ng-include>
+      </div>
+      <div class="item">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options">
+          <ui-gmap-layer type="TrafficLayer" show="true"></ui-gmap-layer>
+          <ui-gmap-marker coords="marker.coords" options="marker.options" idkey="marker.id"></ui-gmap-marker>
+        </ui-gmap-google-map>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+

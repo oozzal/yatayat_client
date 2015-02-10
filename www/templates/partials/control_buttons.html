@@ -1,0 +1,26 @@
+<span ng-show="user.id===report.user_id || user.role==='admin' || user.role==='super_admin'">
+  <button
+    class="button button-small button-outline button-assertive icon ion-trash-a"
+    ng-click="deleteReport($index, $event)">
+  </button>
+</span>
+<!-- <span ng-show="user.id===report.user_id"> -->
+<!--   <a -->
+<!--     class="button button-small button-outline button-royal icon ion-edit" -->
+<!--     ng-href="#/app/edit_report/{{report.id}}" -->
+<!--   > -->
+<!--   </a> -->
+<!-- </span> -->
+<button
+  class="button button-small button-outline button-balanced icon icon-left ion-thumbsup"
+  ng-click="likeReport($index, $event)"
+  ng-bind="report.cached_votes_up">
+</button>
+<button
+  class="button button-small button-outline button-assertive icon icon-left ion-thumbsdown"
+  ng-click="dislikeReport($index, $event)"
+  ng-bind="report.cached_votes_down">
+</button>
+<br>
+<br>
+

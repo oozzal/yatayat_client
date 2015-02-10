@@ -55,8 +55,8 @@ ngModule('yatayat.controllers')
 
   $scope.deleteReport = function($index, $event) {
     $event.preventDefault();
-    UiHelper.confirm()
-    .then(function(res) {
+    UiHelper.confirm('Delete Report?')
+    .then(function() {
       var report = $scope.reports[$index];
       Report.destroy(report.id)
       .then(function(resp) {

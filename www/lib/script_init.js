@@ -4,9 +4,10 @@
 var controllers = [
   'js/controllers/app_controller.js',
   'js/controllers/report_controller.js',
+  'js/controllers/report_edit_controller.js',
+  'js/controllers/report_submit_controller.js',
   'js/controllers/reports_controller.js',
   'js/controllers/start_controller.js',
-  'js/controllers/submit_controller.js',
   'js/controllers/user_controller.js',
   'js/controllers/user_details_controller.js'
 ];

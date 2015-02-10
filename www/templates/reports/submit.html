@@ -5,7 +5,7 @@
   <ion-content class="has-header">
     <ul class="list">
       <li class="item item-input item-select">
-        <span class="input-label">Incident Type:</span>
+        <span class="input-label">What happened?</span>
         <select ng-model="report.category" ng-options="category.name for category in categories">
         </select>
       </li>
@@ -25,7 +25,7 @@
       </li>
     </ul>
     <button class="button button-block button-royal" ng-click="submitReport()">
-      Submit
+      Save
     </button>
   </ion-content>
 </ion-view>
