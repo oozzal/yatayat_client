@@ -10,7 +10,7 @@ ngModule('yatayat.factories')
           defer.resolve(result);
         });
       } else {
-        defer.resolve({simSerialNumber: 'Haude', line1Number: '9808640711'});
+        defer.resolve({simSerialNumber: 'nanu', line1Number: '9808640711'});
       }
       return defer.promise;
     }
