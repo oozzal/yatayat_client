@@ -24,12 +24,14 @@ ngModule('yatayat.factories')
     showToast: function(msg, duration, position) {
       duration = duration || 3000;
       position = position || 'bottom';
-      if(window.cordova) {
-        duration = duration > 1000 ? 'long' : 'short';
-        $cordovaToast.show(message, duration, position);
-      } else {
-        Loading.showWithOptions({ template: msg, noBackdrop: true, duration: duration });
-      }
+      Loading.showWithOptions({ template: msg, noBackdrop: true, duration: duration });
+      // this didn't work on mobile for some reason :(
+      // if(window.cordova) {
+      //   duration = duration > 1000 ? 'long' : 'short';
+      //   $cordovaToast.show(message, duration, position);
+      // } else {
+      //   Loading.showWithOptions({ template: msg, noBackdrop: true, duration: duration });
+      // }
     },
 
     confirm: function(title, template) {
