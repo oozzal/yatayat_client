@@ -31,7 +31,10 @@ ngModule('yatayat.factories')
     post: function(path, data) {
       var defer = $q.defer();
 
-      if($rootScope.user.role !== 'blocked') {
+      if($rootScope.user && $rootScope.user.role === 'blocked') {
+        defer.reject();
+        $rootScope.$broadcast('broadcast:message', 'Sorry you are blocked from the system');
+      } else {
         $http({
           url: this.urlFor(path),
           method: 'POST',
@@ -43,9 +46,6 @@ ngModule('yatayat.factories')
         }, function(error) {
           defer.reject(error.data);
         });
-      } else {
-        defer.reject();
-        $rootScope.$broadcast('broadcast:message', 'Sorry you are blocked from the system');
       }
 
       return defer.promise;

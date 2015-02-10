@@ -29,25 +29,30 @@ ngModule('yatayat.factories')
     register: function(simSerialNumber, phoneNumber) {
       var defer = $q.defer();
 
-      var reg_info = {};
-      reg_info.sim_serial_number = simSerialNumber;
-
-      if(phoneNumber) {
-        reg_info.phone_number = phoneNumber;
-      }
-
-      Raven.post('users', { user: reg_info })
+      // make sure not try to register user twice
+      this.checkRegistration()
       .then(function(user) {
-          if(user && user.id) {
-            defer.resolve(user);
-            //this.storeLocally(user);
-          } else {
-            defer.reject();
-          }
+        defer.resolve(user);
       }, function() {
-        defer.reject();
-      });
+        var reg_info = {};
+        reg_info.sim_serial_number = simSerialNumber;
 
+        if(phoneNumber) {
+          reg_info.phone_number = phoneNumber;
+        }
+
+        Raven.post('users', { user: reg_info })
+        .then(function(user) {
+            if(user && user.id) {
+              defer.resolve(user);
+              //this.storeLocally(user);
+            } else {
+              defer.reject();
+            }
+        }, function() {
+          defer.reject();
+        });
+      });
       return defer.promise;
     }, // end register
 
