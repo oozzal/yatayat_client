@@ -28,6 +28,12 @@
         <span class="input-label">Address</span>
         <input type="text" ng-model="user.address" placeholder="Please enter your address">
       </li>
+      <li class="item item-checkbox item-text-wrap">
+        <label class="checkbox">
+          <input type="checkbox" ng-model="user.notify" checked="user.notify">
+        </label>
+        Notify Me
+      </li>
     </ul>
     <button class="button button-block button-royal" ng-click="updateProfile()">
       Save

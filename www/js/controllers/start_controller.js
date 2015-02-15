@@ -10,6 +10,7 @@ ngModule('yatayat.controllers')
     User.register(simSerialNumber, phoneNumber)
     .then(function(user) {
       $rootScope.user = user;
+      User.registerAtGcm();
       $ionicPopup.alert({
         title: 'Success',
         template: simSerialNumber + ' registered successfully.'

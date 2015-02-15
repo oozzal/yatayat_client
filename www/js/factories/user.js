@@ -1,7 +1,37 @@
+
+
 ngModule('yatayat.factories')
 
-.factory('User', ['BaseModel', 'Raven', '$q', 'Sim', 'LocalStorage', function(BaseModel, Raven, $q, Sim, LocalStorage) {
+.factory('User', ['BaseModel', 'Raven', '$q', 'Sim', 'LocalStorage', '$cordovaPush', '$rootScope', function(BaseModel, Raven, $q, Sim, LocalStorage, $cordovaPush, $rootScope) {
+
+  var gcmConfig = {
+    'senderID': '379911113928'
+  };
+
   return {
+    registeredAtGcm: function() {
+      reg_id = LocalStorage.get('yatayat:device_registration_id')
+      return reg_id !== undefined;
+    },
+
+    // Register At Google Cloud Messaging
+    registerAtGcm: function() {
+      if(typeof cordova === 'undefined') return;
+
+      if(this.registeredAtGcm()) return;
+
+      $cordovaPush.register(gcmConfig)
+      .then(function(result) {
+        // success
+        // deviceToken available here only for IOS
+        // for android: available on '$cordovaPush:notificationReceived' message
+        // alert("GCM Success: " + result);
+      }, function(error) {
+        // failure
+        // alert("GCM Failure: " + error);
+      })
+    },
+
     checkRegistration: function() {
       var defer = $q.defer();
       var user = LocalStorage.getObject('user');

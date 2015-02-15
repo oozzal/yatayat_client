@@ -34,6 +34,20 @@ ngModule('yatayat.factories')
       // }
     },
 
+    alert: function(title, template) {
+      var defer = $q.defer();
+
+      $ionicPopup.alert({
+        title: title,
+        template: template
+      }).then(function(res) {
+        if(res) defer.resolve();
+        else defer.reject();
+      });
+
+      return defer.promise;
+    },
+
     confirm: function(title, template) {
       var defer = $q.defer();
 

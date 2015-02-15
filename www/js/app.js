@@ -10,7 +10,7 @@
 // 'yatayat.controllers' is found in controllers.js
 angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.factories', 'yatayat.controllers'])
 
-.run(['$ionicPlatform', '$rootScope', 'Loading', 'User', 'UiHelper', 'Router', function($ionicPlatform,  $rootScope, Loading, User, UiHelper, Router) {
+.run(['$ionicPlatform', '$rootScope', 'Loading', 'User', 'UiHelper', 'Router', 'LocalStorage', function($ionicPlatform,  $rootScope, Loading, User, UiHelper, Router, LocalStorage) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -25,25 +25,54 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
 
     $rootScope.$on('loading:show', function() {
       Loading.show();
-    })
+    });
 
     $rootScope.$on('loading:hide', function() {
       Loading.hide();
-    })
+    });
 
     $rootScope.$on('broadcast:message', function(event, message) {
       UiHelper.showToast(message);
-    })
+    });
 
     // Always get the user and save in rootScope
     User.checkRegistration()
     .then(function(user) {
       $rootScope.user = user;
+      User.registerAtGcm();
       Router.go('app.reports', true)
       .then(function() {
         UiHelper.showToast('Welcome back!');
       });
     });
+
+    $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+      switch(notification.event) {
+        case 'registered':
+          if (notification.regid.length > 0 ) {
+            // $rootScope.user must be available here
+            $rootScope.user.device_registration_id = notification.regid;
+            User.update($rootScope.user);
+            LocalStorage.set('yatayat:device_registration_id', notification.regid)
+          }
+          break;
+
+        case 'message':
+          // this is the actual push notification. its format depends on the data model from the push server
+          // alert('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
+          UiHelper.showToast(notification.message, 5000);
+          break;
+
+        case 'error':
+          alert('GCM error = ' + notification.msg);
+          break;
+
+        default:
+          alert('An unknown GCM event has occurred');
+          break;
+      }
+    });
+
 
   });
 }])
