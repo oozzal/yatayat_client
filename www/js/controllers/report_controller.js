@@ -9,11 +9,10 @@ ngModule('yatayat.controllers')
 
     uiGmapGoogleMapApi.then(function(maps) {
       var coords = { latitude: data.location.latitude, longitude: data.location.longitude };
-      $scope.map = { center: coords, zoom: 17 , options: { scrollwheel: false } };
+      $scope.map = { center: coords, zoom: 17 , options: { scrollwheel: false, draggable: false } };
       $scope.marker = {
         id: data.location_id,
-        coords: coords,
-        options: { draggable: false }
+        coords: coords
       };
     });
 
