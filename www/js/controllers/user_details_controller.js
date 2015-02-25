@@ -14,7 +14,7 @@ ngModule('yatayat.controllers')
       $scope.detailedUser.role = role;
       User.update($scope.detailedUser)
       .then(function(user) {
-        Router.go('app.reports', false, true);
+        Router.go('app.reports', {reload: true});
       }, function(error) {
         UiHelper.showToast("Something Went Wrong!");
       });

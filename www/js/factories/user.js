@@ -1,5 +1,3 @@
-
-
 ngModule('yatayat.factories')
 
 .factory('User', ['BaseModel', 'Raven', '$q', 'Sim', 'LocalStorage', '$cordovaPush', '$rootScope', function(BaseModel, Raven, $q, Sim, LocalStorage, $cordovaPush, $rootScope) {

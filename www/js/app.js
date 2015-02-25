@@ -40,7 +40,7 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
     .then(function(user) {
       $rootScope.user = user;
       User.registerAtGcm();
-      Router.go('app.reports', true)
+      Router.go('app.reports', {clearHistory: true})
       .then(function() {
         UiHelper.showToast('Welcome back!');
       });
@@ -60,7 +60,20 @@ angular.module('yatayat', ['ionic', 'ngCordova', 'uiGmapgoogle-maps', 'yatayat.f
         case 'message':
           // this is the actual push notification. its format depends on the data model from the push server
           // alert('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
-          UiHelper.showToast(notification.message, 5000);
+          switch(notification.type) {
+            case 'RoleChanged':
+              Router.go('app.profile')
+              .then(function() {
+                UiHelper.showToast(notification.message, 5000);
+              })
+            break;
+            case 'NewReport':
+              Router.go('app.report', {params: {reportId: notification.id}})
+              .then(function() {
+                UiHelper.showToast(notification.message, 5000);
+              })
+            break;
+          }
           break;
 
         case 'error':

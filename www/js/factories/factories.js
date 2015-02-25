@@ -116,10 +116,12 @@ ngModule('yatayat.factories')
   function($q,   $state,   $ionicHistory) {
 
   return {
-    go: function(state, clearHistory, reload) {
+    // params, clearHistory, reload
+    go: function(state, options) {
+      options = options || {};
       var defer = $q.defer();
-      $state.go(state, {}, {reload: !!reload}).then(function() {
-        clearHistory && $ionicHistory.clearHistory();
+      $state.go(state, options.params || {}, {reload: !!options.reload}).then(function() {
+        options.clearHistory && $ionicHistory.clearHistory();
         defer.resolve();
       });
       return defer.promise;

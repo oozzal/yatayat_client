@@ -18,7 +18,7 @@ ngModule('yatayat.controllers')
   $scope.updateReport = function() {
     Report.update($scope.report)
     .then(function() {
-      Router.go('app.reports', false, true)
+      Router.go('app.reports', {reload: true})
       .then(function() {
         UiHelper.showToast('Report Updated Successfully!');
       });

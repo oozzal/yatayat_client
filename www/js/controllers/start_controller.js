@@ -15,7 +15,7 @@ ngModule('yatayat.controllers')
         title: 'Success',
         template: simSerialNumber + ' registered successfully.'
       }).then(function() {
-        Router.go('app.reports', true)
+        Router.go('app.reports', {clearHistory: true})
         .then(function() {
           UiHelper.showToast('Welcome!');
         });

@@ -22,7 +22,7 @@ ngModule('yatayat.controllers')
   $scope.createReport = function() {
     Report.create($scope.report)
     .then(function() {
-      Router.go('app.reports', false, true)
+      Router.go('app.reports', {reload: true})
       .then(function() {
         UiHelper.showToast('Report Created Successfully!');
       });

@@ -5,7 +5,7 @@ ngModule('yatayat.controllers')
     User.update($rootScope.user)
     .then(function(user) {
       $rootScope.user = user;
-      Router.go('app.reports', false, true)
+      Router.go('app.reports', {reload: true})
       .then(function() {
         UiHelper.showToast('Profile Updated Successfully!');
       });
